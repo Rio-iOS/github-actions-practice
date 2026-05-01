@@ -38,3 +38,4 @@ jobs:
       - run: echo "${{ github.workflow }}"
       - run: echo "${{ github.workflow_ref }}"
       - run: echo "${{ github.workflow_sha }}"
+      - run: echo "${{ github.event.pull_request.title }}"
