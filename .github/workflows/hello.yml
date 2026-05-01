@@ -5,10 +5,10 @@ jobs: # ジョブの定義
     hello: # ジョブID
         runs-on: ubuntu-latest # ランナー（Ubuntuで実行）
         steps: # ステップの定義
+          - uses: actions/checkout@v4 # アクションの呼び出し
+            # with: # withキーを使えば、入力パラメータも指定できる
+             # ref: main
           - run: echo "Hello, world" # シェルコマンドの実行
           - run: |
              git log -1
              tree -a .
-          - uses: actions/checkout@v4 # アクションの呼び出し
-            # with: # withキーを使えば、入力パラメータも指定できる
-             # ref: main
