@@ -39,3 +39,9 @@ jobs:
       - run: echo "${{ github.workflow_ref }}"
       - run: echo "${{ github.workflow_sha }}"
       - run: echo "${{ github.event.pull_request.title }}"
+      - run: echo "${{ runner.name }}" # ランナーの名前
+      - run: echo "${{ runner.os }}" # OS（Linux・Windows・macOS）
+      - run: echo "${{ runner.arch }}" # CPUアーキテクチャ（X86・X64・ARM・ARM64）
+      - run: echo "${{ runner.temp }}" # 一時ディレクトリのパス
+      - run: echo "${{ runner.tool_cache }}" # インストール済みツールのディレクトリパス
+      - run: echo "${{ runner.debug }}" # デバッグログが有効な場合のみ「1」をセット
