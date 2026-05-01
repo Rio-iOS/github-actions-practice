@@ -3,6 +3,8 @@ on: push
 jobs:
   print:
     runs-on: ubuntu-latest
+    env:
+      BRANCH: main
     steps:
       - run: echo "${{ github.actor }}" # github コンテキストの参照
       - run: echo "${{ github.run_id }}" # ワークフローの実行ID
@@ -45,3 +47,4 @@ jobs:
       - run: echo "${{ runner.temp }}" # 一時ディレクトリのパス
       - run: echo "${{ runner.tool_cache }}" # インストール済みツールのディレクトリパス
       - run: echo "${{ runner.debug }}" # デバッグログが有効な場合のみ「1」をセット
+      - run: echo "${{env.BRANCH}}"
