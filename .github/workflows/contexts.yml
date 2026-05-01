@@ -5,3 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.actor }}" # github コンテキストの参照
+      - run: echo "${{ github.run_id }}" # github コンテキストの参照
