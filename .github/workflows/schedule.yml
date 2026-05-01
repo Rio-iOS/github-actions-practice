@@ -2,6 +2,7 @@ name: Schedule
 on:
   schedule: # 定期実行イベント
     - cron: '*/15 * * * *' # 15分ごとに起動する cron 式
+  workflow_dispatch:
 jobs:
   run:
     runs-on: ubuntu-latest
