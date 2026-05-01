@@ -5,4 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.actor }}" # github コンテキストの参照
-      - run: echo "${{ github.run_id }}" # github コンテキストの参照
+      - run: echo "${{ github.run_id }}" # ワークフローの実行ID
+      - run: echo "${{ github.head_ref }}" # プルリクエストのソースブランチ
+      - run: echo "${{ github.workspace }}" # ステップのワーキングディレクトリ
+      - run: echo "${{ github.repository }}" # リポジトリ名（octocat/hello-worldのような値）
+      - run: echo "${{ github.repository_owner }}" # リポジトリのオーナー名（octocatのような値）
+      - run: echo "${{ github.event }}" # トリガーになったイベント（オブジェクト）
