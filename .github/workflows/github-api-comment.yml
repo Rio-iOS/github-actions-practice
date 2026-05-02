@@ -4,8 +4,24 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     permissions: # GITHUB_TOKENの権限を指定
+    # パーミッションの一括指定の長期運用はしない(デバッグなど一時的に留める)
+    # permissions: read-all # 読み込み権限をまとめて表示
+    # permissions: write-all # 書き込み権限をまとめて表示
       pull-requests: write # プルリクエストの書き込みを許可
-      contents: read # ソースコードの読み込みを許可
+      contents: read # ソースコードの読み込みを許可（ソースコードの読み込みは暗黙的に許可されている）
+      # contents: read # コメントアウトするとソースコードの読み込み権限を無効化
+      # issues # コメント投稿, Issue作成/編集
+      # statues # commitのステータス更新, CI成功/失敗の表示
+      # checks # Check Run / Check Suite, CI結果の詳細表示 
+      # actions # Actions自体の操作, workflow実行/workflow管理
+      # deployments # デプロイ管理, デプロイ作成/環境への反映
+      # pages # GitHub Pages, 静的サイトの公開
+      # packages # GitHub Packages, docker / npmの公開
+      # discussions # Discussions, 投稿/コメント
+      # repository-projects # プロジェクトボード操作
+      # security-events # セキュリティ通知, Code Scanning, 脆弱性アラート
+      # attestations # ビルド証明（Supply Chain）, artifactの信頼性証明
+      # id-token # OIDCトークン, AWS/GCP/Azureの連携
     steps:
       - uses: actions/checkout@v4
       - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
