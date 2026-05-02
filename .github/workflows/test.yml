@@ -2,13 +2,13 @@ name: Test
 on: pull_request
 jobs:
   test:
-    runs-on: macos-15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4 # ステップ1: チェックアウト
 
       - uses: swift-actions/setup-swift@v3 # ステップ2: 言語セットアップ
         with:
-          swift-version: "6.2"
+          swift-version: "6.2.4"
 
       - name: Swift Version
         run: swift --version # バージョン確認
