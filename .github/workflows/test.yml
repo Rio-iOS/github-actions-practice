@@ -1,0 +1,16 @@
+name: Test
+on: pull_request
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4 # ステップ1: チェックアウト
+
+      - name: Swift Version
+        run: swift --version # バージョン確認
+
+      - name: Build
+        run: swift build # ビルドの実行
+
+      - name: Run Test
+        run: swift test # テストの実行
