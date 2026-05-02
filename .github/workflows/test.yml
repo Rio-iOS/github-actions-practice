@@ -2,9 +2,12 @@ name: Test
 on: pull_request
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4 # ステップ1: チェックアウト
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app
 
       - name: Swift Version
         run: swift --version # バージョン確認
@@ -13,4 +16,4 @@ jobs:
         run: swift build # ビルドの実行
 
       - name: Run Test
-        run: swift test # テストの実行
+        run: swift test --parallel  # テストの実行
