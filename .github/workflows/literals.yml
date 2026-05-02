@@ -11,3 +11,4 @@ jobs:
           LITERAL_NUMBER: ${{ 1234 }} # number型
           LITERAL_STRING: ${{ 'Hello' }} # String型（通常記法）
           LITERAL_OMIT_STRING: World # String型（省略記法）
+      - run: echo ${{ github.event.*.html_url }} # アスタリスク（*）でオブジェクトフィルターを定義
