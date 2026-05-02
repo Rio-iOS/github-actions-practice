@@ -9,3 +9,4 @@ jobs:
           CONTAINS_FUNC: ${{ contains('Hello', 'ell') }} # 「ell」を含むか
           STARTS_WITH_FUNC: ${{ startsWith('Hello', 'He') }} # 「He」で始まる
           ENDS_WITH_FUNC: ${{ startsWith('Hello', 'lo') }} # 「lo」で終わるか
+          ARRAY_CONTAINS_FUNC: ${{ contains(github.event.issue.labels.*.name, 'bug') }} # 配列に「bug」を含むか
