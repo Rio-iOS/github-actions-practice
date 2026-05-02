@@ -16,6 +16,6 @@ struct github_actions_practice {
     }
     
     func isOdd(number: Int) -> Bool {
-        !isEven(number: number)
+        number % 2 != 0
     }
 }
