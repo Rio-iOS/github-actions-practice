@@ -2,7 +2,7 @@
 // https://docs.swift.org/swift-book
 
 @main
-struct github_actions_practice {
+struct GithubActionsPractice {
     static func main() {
         print("Hello, world!")
     }
