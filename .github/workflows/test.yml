@@ -1,5 +1,9 @@
 name: Test
-on: pull_request
+on:
+   pull_request:
+      paths:
+        - "*.swift"
+        - "**/*.swift"
 jobs:
   test:
     runs-on: macos-latest
