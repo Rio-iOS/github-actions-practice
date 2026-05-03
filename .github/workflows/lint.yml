@@ -1,0 +1,23 @@
+name: Lint
+on:
+    pull_request:
+        paths:
+          - "**/*.swift"
+          - "*.swift"
+jobs:
+  lint:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4 # ステップ1: チェックアウト
+
+      - uses: swift-actions/setup-swift@v3 # ステップ2: 言語セットアップ
+        with:
+          swift-version: "6.2.4"
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        run: swiftlint
+
+   

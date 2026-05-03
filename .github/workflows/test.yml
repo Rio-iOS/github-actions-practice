@@ -1,5 +1,18 @@
 name: Test
-on: pull_request
+on:
+   pull_request:
+      paths: # 指定したファイルパスのみ
+        - "*.swift"
+        - "**/*.swift"
+      # paths-ignore: # 指定したファイルパス以外
+      # branches: # 指定したブランチのみ
+      # branches-ignore: # 指定したブランチ以外
+      # tags: # 指定したGitタグのみ
+      # tags-ignore: # 指定したGitタグ以外
+   # issues: # アクティビティタイプが省略されると、Issueの全イベントがトリガーになる
+     # types: [opened, edited] # アクティビティタイプを指定, typesへ指定可能な値はイベントによって異なる
+     # pull-requests: # Pull Requestでアクティビティイベントを省略した時のtypeは以下
+        # type: [opened, synchronize, reopened]
 jobs:
   test:
     runs-on: macos-latest
