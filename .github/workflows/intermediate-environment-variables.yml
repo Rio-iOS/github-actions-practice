@@ -6,4 +6,4 @@ jobs:
     env:
       ACTOR: ${{ github.actor }} # コンテキストの値を環境変数へセット
     steps:
-      - run: echo "${ACTOR}"
+      - run: echo "${ACTOR}" # 環境変数経由でコンテキストのプロパティを参照
