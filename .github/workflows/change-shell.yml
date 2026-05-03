@@ -1,0 +1,17 @@
+name: Change shell
+on: push
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash # シェルにBashを指定（省略時は、UbuntuやmacOSの場合、Bashが起動）
+        run: echo "${SHELL}"
+      - shell: python # （Ubuntu / macOS / Windows）
+      # - shell: bash（Ubuntu / macOS / Windows）（省略時: bash -e {0}）（記述時: bash --noprofile --norc -eo pipefail {0}）
+      # - shell: pwsh（Ubuntu / macOS / Windows）
+      # - shell: sh（Ubuntu / macOS）
+      # - shell: cmd（Windows）
+      # - shell: powershell（Windows）
+        run: |
+          import os
+          print(os.environ['PATH'])
