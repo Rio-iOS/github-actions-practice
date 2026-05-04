@@ -1,0 +1,10 @@
+name: Debug log
+on: push
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      # ワークフローコマンドは以下の構造
+      # ::workflow-command parameter1=<data1>,parameter2=<data2>::<command value>
+      # ::debug::<message>
+      - run: echo "::debug::This is a debug log" # デバッグログ有効化時にのみ出力
