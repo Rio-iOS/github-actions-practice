@@ -5,8 +5,8 @@ jobs:
     strategy:
       matrix: # 多次元マトリックスの定義
         os: [macos-latest] # osプロパティの定義
-        version: ["6.1", "6.2"]
-    runs-on: ${{ matrix.os }}
+        version: ["6.1", "6.2"] # versionプロパティの定義
+    runs-on: ${{ matrix.os }} # osプロパティの参照
     steps:
       - uses: actions/checkout@v4
       - uses: swift-actions/setup-swift@v3
