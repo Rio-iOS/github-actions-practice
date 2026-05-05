@@ -7,7 +7,7 @@ jobs:
         include: # 組み合わせ条件を手動で列挙
           - os: macos-latest # パターン1
             version: "6.2"
-          - os: ubuntu-latest # パターン2
+          - os: macos-latest # パターン2
             version: "6.1"
     runs-on: ${{ matrix.os }}
     steps:
