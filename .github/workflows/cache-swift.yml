@@ -11,6 +11,9 @@ jobs:
           swift-version: "6.2.4"
 
       - name: Cache Swift Package Manager
+        # actions/cache/save : キャッシュの保存だけを行う
+        # actions/cache/restore : キャッシュの復元だけ行う
+        # キャッシュを保存するワークフローを1つだけ実装し、他のワークフローで復元だけを行う場合などに利用可能
         uses: actions/cache@v4
         with:
           key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.resolved') }}
