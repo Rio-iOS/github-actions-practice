@@ -24,8 +24,17 @@ outputs: # アクションの出力
     value: ${{ steps.current.outputs.date }} # 出力する値
     description: ダンプ日時 # 出力値の概要
 
+# メインロジックは、runsキー配下に定義
 runs:
+  # usingキーには、実装方式を指定
   using: composite
+  # Composite Actionの場合は、メインロジックをメタデータファイルへ直接実装
+  # 他方式の場合は、メインロジックへのエントリーポイントを記述
+  # Composite Actionは、stepsキー配下へメインロジックを実装
+  # 各ステップではシェルコマンドの実行や、アクションの呼び出しができる
+  # コンテキストや条件分岐あんども使用でき、ワークフロー構文と似た書き味になる
+  # Composite Actionで利用できるのは、あくまでもメタデータ構文
+  # ワークフロー構文と似た記述はできるが、一部の挙動は異なる
   steps:
     - run: printenv | sort
       shell: bash
