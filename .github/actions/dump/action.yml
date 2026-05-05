@@ -35,16 +35,37 @@ runs:
   # コンテキストや条件分岐あんども使用でき、ワークフロー構文と似た書き味になる
   # Composite Actionで利用できるのは、あくまでもメタデータ構文
   # ワークフロー構文と似た記述はできるが、一部の挙動は異なる
+  # Composite Actionにおけるステップの構文は、ワークフロー構文とほぼ同じ
   steps:
+    # runキー：シェルコマンドを実行する
+    # usesキー：アクションを呼び出す
     - run: printenv | sort
+      # ワークフロー構文ではシェル指定が省略できるが、
+      # メタデータ構文ではシェル指定を省略不可
+      # もし省略した場合、アクションは起動すらしない
+      # ワークフロー構文のようにデフォルトシェルの指定もできない
       shell: bash
 
     - run: echo "${CONTEXT}"
       if: ${{ inputs.enable-context == 'true' }}
       env:
+        # 大半のコンテキストはメタデータ構文でも参照できる
+        # ワークフローのトリガーによって、構造が変わるため、
+        # github.eventプロパティには注意が必要
+        # アクションはどんなワークフローから呼ばれるか分からない。
+        # アクションからすると、実行時にとした値が取得できるか分からない
+        # アクションからgithub.eventプロパティへアクセスするのは、避けた方が無難
+        # 必要な値は入力パラメータ経由で個別に渡す
+        # VariablesやSecretsはメタデータ構文から参照できない。
+        # 必要な場合は、inputsキー経由で入力パラメータとして渡す必要がある
+        # Secretsを入力パラメータとして渡した場合、ログ出力時はマスクされる
+        # GITHUB_ENV環境変数保存した値や、デフォルト環境変数にはアクションからもアクセスできる
         CONTEXT: ${{ toJSON(github) }}
       shell: bash
 
     - id: current
       run: echo "date=$(date)" >> "${GITHUB_OUTPUT}"
+      shell: bash
+
+    - run: echo "EXAMPLE_ACTION_OUTPUT=foo" >> "${GITHUB_ENV}"
       shell: bash
