@@ -1,0 +1,20 @@
+name: Cache Swift
+on: push
+jobs:
+  cache-swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Swift Package Manager
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.resolved') }}
+          path: |
+            .build
+            .swiftpm
+          restore-keys: |
+            ${{ runner.os }}-swiftpm-
+    
+      - name: Build
+        run: swift build
