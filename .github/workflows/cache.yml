@@ -1,0 +1,35 @@
+name: Cache Dummy
+on: push
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # ソースコードのチェックアウト
+      - uses: actions/cache@v4 # キャッシュの復元と保存
+        with:
+          # keyキーには、キャッシュキーを指定
+          # キャッシュキーの生成と保存に使用する識別子
+          # OSとCPUアーキテクチャでキャッシュする場合は以下
+          # key: example-${{ runner.os }}-${{ runner.arch }}
+          # 依存関係を更新した時だけキャッシュを更新する場合は、ファイルハッシュをキャッシュキーに指定（hashFiles）
+          key: test-${{ runner.os }}-${{ github.sha }} # キャッシュキー
+          # pathキーには、キャッシュ対象のディレクトリパス、またはファイルパスを指定
+          # パスは複数指定でき、Globもサポート
+          path: ${{ github.workspace }}/dummy # キャッシュ対象のパス
+          # restore-keysキーには、キャッシュミス時のリストアキーを複数指定
+          # キャッシュの復元フロー
+          # 1. keyキーで定義したキャッシュキーと、厳密に一致するキャッシュを探す
+          # 2. リストアキーの定義順に、プレフィックスが一致するキャッシュを探す
+          # restore-keysは、省略可能
+          # リストアキーは、パッケージマネージャーとの併用時に威力を発揮
+          # 大半のパッケージマネージャーは、キャッシュにないファイルだけダウンロードするよう振る舞う。
+          # 部分的にでも使えるキャッシュがあれば、それを使う
+          # リストアキーを設定し、以前保存したキャッシュを利用できるようにする
+          # ダウンロード時間が減り、パッケージマネージャの動作が高速化する
+          restore-keys: |
+            test-${{ runner.os }}-
+      - run: |
+          if [[ -f "${GITHUB_WORKSPACE}/dummy" ]]; then exit 0; fi
+          dd if=/dev/urandom of="${GITHUB_WORKSPACE}/dummy" bs=1M count=10
+          sleep 30
+      - run: ls -lh "${GITHUB_WORKSPACE}/dummy"
