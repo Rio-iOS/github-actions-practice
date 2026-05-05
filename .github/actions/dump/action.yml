@@ -69,3 +69,16 @@ runs:
 
     - run: echo "EXAMPLE_ACTION_OUTPUT=foo" >> "${GITHUB_ENV}"
       shell: bash
+    
+    - run: echo "${GITHUB_TOKEN}"
+      env:
+        # secrets.GITHUB_TOKENプロパティは、github.tokenでアクセスできる
+        GITHUB_TOKEN: ${{ github.token }}
+      shell: bash
+
+    # 以下のように記述するとエラーになる
+    # - run: ./script.sh
+      # shell: bash
+
+    - run: "${GITHUB_ACTION_PATH}/script.sh" # 切り出したスクリプトを実行可能
+      shell: bash
