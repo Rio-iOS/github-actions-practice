@@ -4,7 +4,7 @@
 @main
 struct github_actions_practice {
     static func main() {
-        print("Hello, world!")
+        print("Hello, world")
     }
     
     func greeting() -> String {
