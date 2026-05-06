@@ -18,7 +18,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 5 # タイムアウト時間を5分に設定
     steps:
-      - uses: actions/checkout@v4 # ステップ1: チェックアウト
+      - uses: actions/checkout@v6 # ステップ1: チェックアウト
 
       - uses: swift-actions/setup-swift@v3 # ステップ2: 言語セットアップ
         with:

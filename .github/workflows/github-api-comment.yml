@@ -23,7 +23,7 @@ jobs:
       # attestations # ビルド証明（Supply Chain）, artifactの信頼性証明
       # id-token # OIDCトークン, AWS/GCP/Azureの連携
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
         env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub CLI用のクレデンシャル
