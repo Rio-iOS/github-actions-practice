@@ -1,0 +1,46 @@
+name: Auto patch merge
+on: pull_request
+jobs:
+  merge:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - id: meta # 依存関係のメタデータを取得
+        uses: dependabot/fetch-metadata@v2 # 条件分岐でパッチバージョンかチェック
+
+      # dependabot/fetch-metadataアクションから取得したメタデータを条件式で利用
+      - if: ${{ steps.meta.outputs.update-type == 'version-update:semver-patch' }}
+        run: |
+            gh pr review "${GITHUB_HEAD_REF}" --approve
+            gh pr merge "${GITHUB_HEAD_REF}" --merge --auto
+
+      # ＜開発環境向けの変更は自動マージさせる戦略＞
+      # >-：複数行を1行にまとめるための記法
+      # dependency-typeプロパティには以下が指定できる
+      # direct:production：本番環境向けの依存関係
+      # direct:development：開発環境向けの依存関係（サポートしているのは、npmやMaven、pipなど一部に限られるため、常に使えるわけではない。サポートされているなら有効な戦略）
+      # indirect：推移的な依存関係
+      #  - if: >-
+      #        ${{ steps.meta.outputs.dependency-type == 'direct:development' &&
+      #            steps.meta.outputs.update-type != 'version-update:semver-major' }}
+      #    run: |
+      #      gh pr review "${GITHUB_HEAD_REF}" --approve
+      #      gh pr merge "${GITHUB_HEAD_REF}" --merge --auto
+
+      # ＜GitHub Actions向けの変更は自動マージ＞
+      # GitHub Actionsなどユーザーに影響しないと、断定できる依存関係もある
+      # ユーザーに影響がないなら自動マージしても良い
+      # 万が一壊れても、困るのはソフトウェアエンジニアだけである
+      # package-ecosystemプロパティは、パッケージのエコシステムの識別子が取得可能
+      # 'github_actions'は、dependabotの'github-actions'とは、区切り文字が異なるので注意
+      # - if: >-
+      #     ${{ steps.meta.outputs.package-ecosystem == 'github_actions' &&
+      #         steps.meta.outputs.update-type != 'version-update:semver-major' }}
+      #   run: |
+      #     gh pr review "${GITHUB_HEAD_REF}" --approve
+      #     gh pr merge "${GITHUB_HEAD_REF}" --merge --auto 

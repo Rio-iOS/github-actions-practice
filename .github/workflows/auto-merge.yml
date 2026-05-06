@@ -1,0 +1,21 @@
+name: Auto merge
+on: pull_request
+jobs:
+  merge:
+    # Dependabotのプルリクエスト
+    # ワークフローの実行をDependabotが作成したPRに制限する
+    # 普通のPRが勝手にマージされると困るため、ワークフローのフィルタリングは不可欠
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    permissions: # マージに必要なパーミッション
+      contents: write
+      pull-requests: write
+    env:
+        # GitHub CLIは、GITHUB_TOKEN環境変数を自動的にクレデンシャルと認識
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub CLIのクレデンシャル
+    steps:
+      - uses: actions/checkout@6
+      # GITHUB_HEAD_REF環境変数からソースブランチ名を取得し、マージ対象のPRを識別する
+      - run: |
+          gh pr review "${GITHUB_HEAD_REF}" --approve
+          gh pr merge "${GITHUB_HEAD_REF}" --merge --auto # GitHub CLIでマージ 
