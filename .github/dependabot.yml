@@ -7,3 +7,16 @@ updates: # 依存関係のアップデート設定（updates配下に複数指�
    directory: / # パッケージマニフェストの配置先ディレクトリ
    schedule: # バージョンアップスケジュール
      interval: daily # バージョンアップ間隔は、intervalキーへ指定（daily, weekly, monthlyが指定可能）
+   ignore: # バージョンアップの除外設定
+    - dependency-name: actions/upload-artifact # 除外する依存関係の名前
+      versions: # 除外対象のバージョン
+       - 4.3.0
+       - 4.3.1
+    
+    - dependency-name: 'actions/*' # アスタリスクは任意文字列にマッチ
+      update-types: # 除外するバージョンアップの種類
+       # 以下が指定可能
+       # version-update:semver-majaor：メジャーバージョン（X.Y.ZのX部分）
+       # version-update:semver-minor：メジャーバージョン（X.Y.ZのY部分）
+       # version-update:semver-patch：メジャーバージョン（X.Y.ZのZ部分）
+       - version-update:semver-major
