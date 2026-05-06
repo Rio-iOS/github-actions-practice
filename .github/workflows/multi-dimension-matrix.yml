@@ -8,7 +8,7 @@ jobs:
         version: ["6.1", "6.2"] # versionプロパティの定義
     runs-on: ${{ matrix.os }} # osプロパティの参照
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: swift-actions/setup-swift@v3
         with:
           swift-version: ${{ matrix.version }} # versionプロパティの参照
