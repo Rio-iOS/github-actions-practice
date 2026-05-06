@@ -1,0 +1,9 @@
+version: 2 # 設定ファイル自体のバージョン（2で固定）
+updates: # 依存関係のアップデート設定（updates配下に複数指定可能）
+ - package-ecosystem: github-actions # パッケージエコシステム（パッケージマネージャやツールの識別子を指定）
+   # パッケージマニフェスト:依存関係のバージョンが記述されたファイル
+   # 配置先ディレクトリのパスは、リポジトリのルートディレクトリが起点になる
+   # GitHub Actionsのみ固定で「/」と指定する
+   directory: / # パッケージマニフェストの配置先ディレクトリ
+   schedule: # バージョンアップスケジュール
+     interval: daily # バージョンアップ間隔は、intervalキーへ指定（daily, weekly, monthlyが指定可能）

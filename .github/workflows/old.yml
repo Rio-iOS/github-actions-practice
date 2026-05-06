@@ -1,0 +1,7 @@
+name: Old
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3 # 古いバージョンを意図的に指定
