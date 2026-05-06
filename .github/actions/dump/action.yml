@@ -80,5 +80,8 @@ runs:
     # - run: ./script.sh
       # shell: bash
 
+    # GITHUB_ACTION_PATH環境変数はデフォルト環境変数
+    # アクションのインストール先ディレクトリがセットされている
+    # スクリプトを切り出す場合は、この環境変数を思い出す
     - run: "${GITHUB_ACTION_PATH}/script.sh" # 切り出したスクリプトを実行可能
       shell: bash
