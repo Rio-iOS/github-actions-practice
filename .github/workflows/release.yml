@@ -23,7 +23,7 @@ jobs:
           xcodebuild \
           -project iOS/HelloWorld/HelloWorld.xcodeproj \
           -scheme HelloWorld \
-          -destination "platform=iOS Simulator" \
+          -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
           build
     
       - name: UnitTest
@@ -31,6 +31,6 @@ jobs:
           xcodebuild \
           -project iOS/HelloWorld/HelloWorld.xcodeproj \
           -scheme HelloWorld \
-          -destination "platform=iOS Simulator" \
+          -destination "platform=iOS Simulator,name=iPhone 17 Pro" \
           -only-testing:HelloWorldTests \
           test
