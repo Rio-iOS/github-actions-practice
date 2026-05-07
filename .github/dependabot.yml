@@ -1,5 +1,6 @@
 version: 2 # 設定ファイル自体のバージョン（2で固定）
 updates: # 依存関係のアップデート設定（updates配下に複数指定可能）
+ # GitHub Actions
  - package-ecosystem: github-actions # パッケージエコシステム（パッケージマネージャやツールの識別子を指定）
    # パッケージマニフェスト:依存関係のバージョンが記述されたファイル
    # 配置先ディレクトリのパスは、リポジトリのルートディレクトリが起点になる
@@ -19,4 +20,14 @@ updates: # 依存関係のアップデート設定（updates配下に複数指�
        # version-update:semver-majaor：メジャーバージョン（X.Y.ZのX部分）
        # version-update:semver-minor：メジャーバージョン（X.Y.ZのY部分）
        # version-update:semver-patch：メジャーバージョン（X.Y.ZのZ部分）
-       - version-update:semver-major
+       - "version-update:semver-major"
+
+ # Swift Package Manager
+ - package-ecosystem: swift
+   directory: /
+   schedule:
+     interval: daily
+   ignore:
+    - dependency-name: '*'
+      update-types:
+       - "version-update:semver-major"
