@@ -197,3 +197,9 @@ jobs:
           --file $PWD/build/HelloWorld.ipa \
           --apiKey ${APPSTORE_KEY_ID} \
           --apiIssuer ${APPSTORE_ISSUER_ID}
+
+      - name: Create Release Note
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${VERSION}" --tile "${VERSION}" --generate-notes
