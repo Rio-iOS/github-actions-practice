@@ -202,4 +202,4 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${VERSION}" --tile "${VERSION}" --generate-notes
+          gh release create "${VERSION}" --title "${VERSION}" --generate-notes
