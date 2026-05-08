@@ -120,6 +120,12 @@ jobs:
           # 復元した Provisioning Profile は不要なので削除
           rm profile.mobileprovision
 
+      - name: Bump Build Number（timestamp）
+        run: |
+          BUILD_NUMBER=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
+          echo "BUILD_NUMBER: $BUILD_NUMBER"
+          agvtool new-version -all $BUILD_NUMBER
+
       - name: Archive
         run: |
           mkdir -p build
