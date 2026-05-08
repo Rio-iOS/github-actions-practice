@@ -12,8 +12,6 @@ on:
 jobs:
   release:
     runs-on: macos-26
-    env:
-      VERSION: ${{ github.ref_name }} # v1.2.3のような値をGitタグから取得
     permissions:
       contents: write # リリースノートの作成に必要なパーミッション
     steps:
@@ -143,29 +141,36 @@ jobs:
           # 復元した Provisioning Profile は不要なので削除
           rm profile.mobileprovision
 
-      - name: Set Marketing Version
-        run: |
-          cd iOS/HelloWorld
+    # GENERATING_INFOPLIST_FILE=YES により Archive のタイミングでバージョンが上書きされているため削除（学習のために残す）
+    #   - name: Set Marketing Version
+    #     run: |
+    #       cd iOS/HelloWorld
 
-          # agvtool new-marketing-version $VERSION は、
-          # 「Cannot find "HelloWorld.xcodeproj/../NO"」の Warning が出力されるので利用しない
-          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Info.plist \
-          || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $VERSION" Info.plist
+    #       # agvtool new-marketing-version $VERSION は、
+    #       # 「Cannot find "HelloWorld.xcodeproj/../NO"」の Warning が出力されるので利用しない
+    #       /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Info.plist \
+    #       || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $VERSION" Info.plist
 
-          echo "Set Marketing Version: $VERSION"
+    #       echo "Set Marketing Version: $VERSION"
+    
+    # Archive の部分で設定するように統一するため削除（学習のために残す）
+    #   - name: Bump Build Number（timestamp）
+    #     run: |
+    #       cd iOS/HelloWorld
 
-      - name: Bump Build Number（timestamp）
-        run: |
-          cd iOS/HelloWorld
+    #       BUILD_NUMBER=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
+    #       echo "BUILD_NUMBER: $BUILD_NUMBER"
 
-          BUILD_NUMBER=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
-          echo "BUILD_NUMBER: $BUILD_NUMBER"
-
-          agvtool new-version -all $BUILD_NUMBER
+    #       agvtool new-version -all $BUILD_NUMBER
 
       - name: Archive
         run: |
           mkdir -p build
+
+          BUILD_NUMBER=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
+
+          echo "Marketing Version: $VERSION"
+          echo "Build Number: $BUILD_NUMBER"
 
           xcodebuild \
           -project iOS/HelloWorld/HelloWorld.xcodeproj \
@@ -174,7 +179,9 @@ jobs:
           -destination "generic/platform=iOS" \
           -archivePath $PWD/build/HelloWorld.xcarchive \
           CODE_SIGN_STYLE=Manual \
-          archive
+          MARKETING_VERSION=$VERSION \
+          CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
+          clean archive
 
       - name: Export IPA
         run: |
