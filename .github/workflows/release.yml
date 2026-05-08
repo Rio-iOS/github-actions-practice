@@ -122,8 +122,11 @@ jobs:
 
       - name: Bump Build Number（timestamp）
         run: |
+          cd iOS/HelloWorld
+
           BUILD_NUMBER=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
           echo "BUILD_NUMBER: $BUILD_NUMBER"
+
           agvtool new-version -all $BUILD_NUMBER
 
       - name: Archive
