@@ -147,7 +147,12 @@ jobs:
         run: |
           cd iOS/HelloWorld
 
-          agvtool new-marketing-version $VERSION
+          # agvtool new-marketing-version $VERSION は、
+          # 「Cannot find "HelloWorld.xcodeproj/../NO"」の Warning が出力されるので利用しない
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Info.plist \
+          || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $VERSION" Info.plist
+
+          echo "Set Marketing Version: $VERSION"
 
       - name: Bump Build Number（timestamp）
         run: |
