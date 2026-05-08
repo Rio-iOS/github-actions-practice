@@ -6,13 +6,19 @@ on:
   workflow_dispatch:
 jobs:
   release:
-    runs-on: macos-latest
+    runs-on: macos-26
     env:
       VERSION: ${{ github.ref_name }} # v1.2.3のような値をGitタグから取得
     permissions:
       contents: write # リリースノートの作成に必要なパーミッション
     steps:
       - uses: actions/checkout@v6
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_26.4.1.app
+
+      - name: Show Xcode Version
+        run: xcodebuild -version
 
       - uses: swift-actions/setup-swift@v3
         with:
