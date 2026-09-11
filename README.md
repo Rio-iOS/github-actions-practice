@@ -4,7 +4,7 @@ GitHub Actionsのイベント、ジョブ、式、キャッシュ、権限、リ
 
 ## 通常の品質確認
 
-macOS / Xcode 26.6で、ルートから `python3 Scripts/verify.py` を実行します。対象一覧は `python3 Scripts/verify.py --list`、単体実行は `python3 Scripts/verify.py --index 0` です。`Quality` ワークフローも同じ一覧を使い、SimulatorビルドとSwiftテストを行います。
+macOS / Xcode 26.6で、ルートから `swift Scripts/verify.swift` を実行します。対象一覧は `swift Scripts/verify.swift --list`、単体実行は `swift Scripts/verify.swift --index 0` です。`Quality` ワークフローも同じ一覧を使い、SimulatorビルドとSwiftテストを行います。
 
 ## 学習用ワークフロー
 
