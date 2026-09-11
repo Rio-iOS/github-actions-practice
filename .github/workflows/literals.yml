@@ -6,9 +6,11 @@ jobs:
     steps:
       - run: printenv | grep 'LITERAL_'
         env:
-          LITERAL_NULL: ${{ null }} # null型
+          LITERAL_NULL: ${{ toJSON(null) }} # null型を文字列として表示
           LITERAL_BOOLEAN: ${{ true }} # boolean型
           LITERAL_NUMBER: ${{ 1234 }} # number型
           LITERAL_STRING: ${{ 'Hello' }} # String型（通常記法）
           LITERAL_OMIT_STRING: World # String型（省略記法）
-      - run: echo ${{ github.event.*.html_url }} # アスタリスク（*）でオブジェクトフィルターを定義
+      - run: printf '%s\n' "$URLS_JSON"
+        env:
+          URLS_JSON: ${{ toJSON(github.event.*.html_url) }} # 配列をJSONに変換して表示

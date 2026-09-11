@@ -1,0 +1,14 @@
+[
+  {
+    "kind": "app",
+    "name": "HelloWorld",
+    "scheme": "HelloWorld",
+    "project": "iOS/HelloWorld/HelloWorld.xcodeproj",
+    "workspace": null
+  },
+  {
+    "kind": "package",
+    "name": "github-actions-practice",
+    "path": "."
+  }
+]

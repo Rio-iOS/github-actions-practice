@@ -6,45 +6,129 @@ jobs:
     env:
       BRANCH: main
     steps:
-      - run: echo "${{ github.actor }}" # github コンテキストの参照
-      - run: echo "${{ github.run_id }}" # ワークフローの実行ID
-      - run: echo "${{ github.head_ref }}" # プルリクエストのソースブランチ
-      - run: echo "${{ github.workspace }}" # ステップのワーキングディレクトリ
-      - run: echo "${{ github.repository }}" # リポジトリ名（octocat/hello-worldのような値）
-      - run: echo "${{ github.repository_owner }}" # リポジトリのオーナー名（octocatのような値）
-      - run: echo "${{ github.action }}"
-      - run: echo "${{ github.action_path }}"
-      - run: echo "${{ github.action_ref }}"
-      - run: echo "${{ github.action_repository }}"
-      - run: echo "${{ github.action_status }}"
-      - run: echo "${{ github.actor_id }}"
-      - run: echo "${{ github.api_url }}"
-      - run: echo "${{ github.base_ref }}"
-      - run: echo "${{ github.event_name }}"
-      - run: echo "${{ github.graphql_url }}"
-      - run: echo "${{ github.job }}"
-      - run: echo "${{ github.path }}"
-      - run: echo "${{ github.ref }}"
-      - run: echo "${{ github.ref_name }}"
-      - run: echo "${{ github.ref_protected }}"
-      - run: echo "${{ github.ref_type }}"
-      - run: echo "${{ github.repository_id }}"
-      - run: echo "${{ github.repository_owner_id }}"
-      - run: echo "${{ github.repositoryUrl }}"
-      - run: echo "${{ github.retention_days }}"
-      - run: echo "${{ github.run_number }}"
-      - run: echo "${{ github.run_attempt }}"
-      - run: echo "${{ github.server_url }}"
-      - run: echo "${{ github.sha }}"
-      - run: echo "${{ github.triggering_actor }}"
-      - run: echo "${{ github.workflow }}"
-      - run: echo "${{ github.workflow_ref }}"
-      - run: echo "${{ github.workflow_sha }}"
-      - run: echo "${{ github.event.pull_request.title }}"
-      - run: echo "${{ runner.name }}" # ランナーの名前
-      - run: echo "${{ runner.os }}" # OS（Linux・Windows・macOS）
-      - run: echo "${{ runner.arch }}" # CPUアーキテクチャ（X86・X64・ARM・ARM64）
-      - run: echo "${{ runner.temp }}" # 一時ディレクトリのパス
-      - run: echo "${{ runner.tool_cache }}" # インストール済みツールのディレクトリパス
-      - run: echo "${{ runner.debug }}" # デバッグログが有効な場合のみ「1」をセット
-      - run: echo "${{env.BRANCH}}"
+      - run: printf '%s\n' "$CONTEXT_VALUE" # github コンテキストの参照
+        env:
+          CONTEXT_VALUE: ${{ github.actor }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # ワークフローの実行ID
+        env:
+          CONTEXT_VALUE: ${{ github.run_id }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # プルリクエストのソースブランチ
+        env:
+          CONTEXT_VALUE: ${{ github.head_ref }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # ステップのワーキングディレクトリ
+        env:
+          CONTEXT_VALUE: ${{ github.workspace }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # リポジトリ名（octocat/hello-worldのような値）
+        env:
+          CONTEXT_VALUE: ${{ github.repository }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # リポジトリのオーナー名（octocatのような値）
+        env:
+          CONTEXT_VALUE: ${{ github.repository_owner }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.action }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.action_path }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.action_ref }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.action_repository }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.action_status }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.actor_id }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.api_url }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.base_ref }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.event_name }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.graphql_url }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.job }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.path }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.ref }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.ref_name }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.ref_protected }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.ref_type }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.repository_id }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.repository_owner_id }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.repositoryUrl }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.retention_days }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.run_number }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.run_attempt }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.server_url }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.sha }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.triggering_actor }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.workflow }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.workflow_ref }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.workflow_sha }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ github.event.pull_request.title }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # ランナーの名前
+        env:
+          CONTEXT_VALUE: ${{ runner.name }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # OS（Linux・Windows・macOS）
+        env:
+          CONTEXT_VALUE: ${{ runner.os }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # CPUアーキテクチャ（X86・X64・ARM・ARM64）
+        env:
+          CONTEXT_VALUE: ${{ runner.arch }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # 一時ディレクトリのパス
+        env:
+          CONTEXT_VALUE: ${{ runner.temp }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # インストール済みツールのディレクトリパス
+        env:
+          CONTEXT_VALUE: ${{ runner.tool_cache }}
+      - run: printf '%s\n' "$CONTEXT_VALUE" # デバッグログが有効な場合のみ「1」をセット
+        env:
+          CONTEXT_VALUE: ${{ runner.debug }}
+      - run: printf '%s\n' "$CONTEXT_VALUE"
+        env:
+          CONTEXT_VALUE: ${{ env.BRANCH }}
